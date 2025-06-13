@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order List</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link to your external CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Optional: For icons -->
+</head>
+<body>
+    <div class="container">
+        <h1>Order List</h1>
+        <table class="order-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Pizza Name</th>
+                    <th>Quantity</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate over orders and display each order -->
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.orderItemId}"></td>
+                    <td th:text="${order.customer.name}"></td>
+                    <td th:text="${order.pizzaName}"></td>
+                    <td th:text="${order.quantity}"></td>
+                    <td th:text="${order.totalPrice}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination (if you plan to use it) -->
+        <div class="pagination">
+            <a href="#" th:href="@{|/orders?page=${currentPage - 1}|}" th:if="${currentPage > 1}">&laquo; Previous</a>
+            <a href="#" th:href="@{|/orders?page=${currentPage + 1}|}" th:if="${hasNextPage}">Next &raquo;</a>
+        </div>
+    </div>
+</body>
+</html>
